@@ -19,7 +19,10 @@ class CharpterContentParser(HTMLParser):
   
     def handle_data(self, data):
         if self.flg>0:  #self.flg = 1 时，是<div>之后的第一行，例子中的第一行和最后一行通常是广告，但也有极少数是正文。因此也收下。
-            self.re.append(data.strip()+"\n") #收下所有文本，避免漏了。删掉了全角半角空格，用换行替换了<br/>。
+            data = data.strip()
+            if data != "" : #非空行
+               self.re.append("　　"+data) #行头增加了2个全角空格。
+            self.re.append("\n") #用unix换行替换了<br/>
         else:
             pass
 
@@ -37,14 +40,15 @@ class CharpterContentParser(HTMLParser):
         else:
             pass
 
-my=CharpterContentParser()
-my.feed(open('demo_charpter.html').read())
 
-f = open('demo_charpter.txt', 'w')  #默认存盘的字符编码是utf8，mac下测试。
-#for i in range(len(my.re)) :   # 效果同下，下面的更简单。
-#    f.write(my.re[i]+"\n")
-f.writelines(my.re)
-f.close()
+if __name__ == '__main__':
 
-my.close()
+    my=CharpterContentParser()
+    my.feed(open('demo_charpter.html').read())
+
+    f = open('demo_charpter.txt', 'w')  #默认存盘的字符编码是utf8，mac下测试。
+    f.writelines(my.re)
+    f.close()
+
+    my.close()
 

@@ -1,0 +1,24 @@
+[
+    {
+        "search": "　*<>一秒记住.*小说阅读。\n*",
+        "replace": ""
+    },
+    {
+        "search": "read[a-z]\\(\\)\\;\\s*",
+        "replace": ""
+    },
+    {
+        "search": "\\.77[NnTt0-9/]+",
+        "replace": ""
+    },
+    {
+        "search": "　*手机用户请浏览.*更优质的阅读体验。",
+        "replace": ""
+    },
+    {
+        "search": "^(.+)$(\n\n*)",
+        "replace": "　　\\g<1>\n\n",
+        "count":0,
+        "flag":8
+    }
+]
